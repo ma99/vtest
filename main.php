@@ -13,14 +13,22 @@
 				<input type="checkbox" id="checkbox" v-model="checked">
 				<label for="checkbox">{{ checked }}</label>	
 
-				<input type="checkbox" id="a1" value="A1" v-model="checkedNames">
+				<!-- <input type="checkbox" id="a1" value="A1" v-model="checkedNames">
 				<label for="A1">A1</label>
 				<input type="checkbox" id="a2" value="A2" v-model="checkedNames">
 				<label for="a2">A2</label>
 				<input type="checkbox" id="b1" value="B1" v-model="checkedNames">
 				<label for="b1">B1</label>
 				<input type="checkbox" id="b2" value="B2" v-model="checkedNames">
-				<label for="b2">B2</label>
+				<label for="b2">B2</label> -->
+				<input 
+					type="checkbox"
+					v-for="checkedName in checkedNames"
+				 	id="checkedName" 
+				 	value="checkedName" 
+				 	v-model="checkedNames"
+				 >
+				<label for="checkedName"> {{ checkedName }} </label>
 				<br>
 				<span>Checked names: {{ checkedNames }}</span>
 				
@@ -37,7 +45,8 @@
 				template: '#test-template',	
 				data: function(){
 					return {
-						checked: false,	
+						checked: false,
+						checkedName:'',
 						checkedNames: []					
 					}
 				},
