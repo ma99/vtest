@@ -14,10 +14,11 @@
 		
 		<template id="test-template">
 			<div>
-				<button v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false }"
-						v-for="seat in seats" 					
-						@click="toggle(seat)"						
-						:disabled="isDisabledSeatSelection(seat.sts)"					
+				<button 
+					v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false }"
+					v-for="seat in seats" 					
+					@click="toggle(seat)"						
+					:disabled="isDisabledSeatSelection(seat.sts)"					
 				> 				    	
 					{{ seat.no }} - {{ seat.sts }}
 				</button>			
@@ -36,9 +37,7 @@
 				template: '#test-template',
 				props: ['seats'],
 				data: function() {
-						return {
-			        		arr: [], 						
-			        		deleteTheSeat: '',		        		
+						return {			        		        		
 			        		seatNo: '',		        		
 						    selectedSeat: []
 						}
@@ -111,10 +110,7 @@
 		<style>
 			.active {
 				background-color: green;
-			}
-			/*.checked {
-				background-color: green;
-			}*/
+			}			
 			.booked {
 				background-color: yellow;	
 			}
