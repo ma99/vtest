@@ -4,12 +4,8 @@
 		<title>Seat Planning</title>
 	</head>
 	<body>
-		<div id="app"> 
-			<!-- <seat-display v-for="seat in seats" v-bind:seat="seat"></seat-display> -->
+		<div id="app"> 			
 			<seat-display> </seat-display>	
-			
-			<!-- <pre> {{ $data | json }}</pre> -->
-
 		</div>
 		
 		<template id="test-template">
@@ -17,8 +13,7 @@
 				<button 
 					v-bind:class="{ active : seat.checked, inactive : !seat.checked  }"
 					v-for="seat in seatList" 					
-					@click="toggle(seat)"						
-					:disabled="isDisabledSeatSelection(seat.sts)"					
+					@click="toggle(seat)"																
 				> 				    	
 					{{ seat.no }} - {{ seat.sts }}
 				</button>			
@@ -26,7 +21,7 @@
 				<!-- {{ seatStatus(seat.sts) }} -->
 		    	<!-- <span  v-show="seat.checked">Toggle info</span> -->
 		    	<br>
-		    	{{ seatList }}
+		    	 <!-- {{ seatList }} -->
 			</div>	
 		</template>
 
