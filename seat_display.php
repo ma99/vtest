@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Seat Planning Component Based</title>
+		<title>Seat Display Component Based</title>
 	</head>
 	<body>
 		<div id="app"> 
@@ -28,7 +28,7 @@
 		</template>
 
 		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.8/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
 		
 		
 		<script>

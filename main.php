@@ -5,106 +5,75 @@
 	</head>
 	<body>
 		<div id="app"> 
-			<!-- <seat-display v-for="seat in seats" v-bind:seat="seat"></seat-display> -->
-			<seat-display :seats="seatList"> </seat-display>	
-			
-			<!-- <pre> {{ $data | json }}</pre> -->
-
+			<seat-planning> </seat-planning>
 		</div>
 		
 		<template id="test-template">
 			<div>
-				<button v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false }"
-						v-for="seat in seats" 					
-						@click="toggle(seat)"						
-						:disabled="isDisabledSeatSelection(seat.sts)"					
-				> 				    	
-					{{ seat.no }} - {{ seat.sts }}
-				</button>			
-			
-				<!-- {{ seatStatus(seat.sts) }} -->
-		    	<!-- <span  v-show="seat.checked">Toggle info</span> -->
+				<input type="checkbox" id="checkbox" v-model="checked">
+				<label for="checkbox">{{ checked }}</label>	
+
+				<input type="checkbox" id="a1" value="A1" v-model="checkedNames">
+				<label for="A1">A1</label>
+				<input type="checkbox" id="a2" value="A2" v-model="checkedNames">
+				<label for="a2">A2</label>
+				<input type="checkbox" id="b1" value="B1" v-model="checkedNames">
+				<label for="b1">B1</label>
+				<input type="checkbox" id="b2" value="B2" v-model="checkedNames">
+				<label for="b2">B2</label>
+				<br>
+				<span>Checked names: {{ checkedNames }}</span>
+				
+				
 			</div>	
 		</template>
 
 		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.8/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
 		
 		
 		<script>
-			Vue.component('seat-display', {
-				template: '#test-template',
-				props: ['seats'],
-				data: function() {
-						return {
-			        		arr: [], 						
-			        		deleteTheSeat: '',		        		
-			        		seatNo: '',		        		
-						    selectedSeat: []
-						}
+			Vue.component('seat-planning', {
+				template: '#test-template',	
+				data: function(){
+					return {
+						checked: false,	
+						checkedNames: []					
+					}
 				},
-				
-				methods: {
-					toggle: function(seat){
-						// console.log('clicked');
-						// console.log(seat.no);
-						seat.checked = !seat.checked;		        		        	
-			        	if (seat.checked) {
-			        		console.log('seat checked=', seat.checked);
-			        		this.addSeat(seat.no); // to selectedSeat array		        		
-			        		return ;
-			        	}
-			        	console.log('seat NOT checked=', seat.checked);
-			        	//var indx = this.selectedSeat.findIndex(seat);		        	
-			        	this.removeSeat(seat.no, seat); // to selectedSeat array		        		            
-			        },
-			        addSeat: function(seatNo){
-			        	console.log('+', seatNo);
-			        	this.selectedSeat.push({
-			    			no: seatNo,
-							sts: 'booked' //'selected'
-			    		});
-			        },
-			        removeSeat: function(seatNo, seat){
-			        	console.log('-', seatNo);
-			        	//var indx = this.selectedSeat.indexOf(seatNo);  
-			        	/*
-			    			'findIndex' callback is invoked with three arguments: 
-			    			1.the value of the element, 
-			    			2. the index of the element, and 
-			    			3. the Array object being traversed.
-			    			ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex 
-			    			*/     	
-			        	var indx = this.selectedSeat.findIndex(function(seat){ 
-			    				// here 'seat' is array object of selectedSeat array
-			    				 return seat.no == seatNo;
-			    		});
-			    		console.log(indx);
-			    		this.selectedSeat.splice(indx, 1);
-			    		return;
-			        },
-			        isDisabledSeatSelection: function(seatStatus){
-			        	console.log('disableSelection=', seatStatus);
-			        	//var sts;
-			        	return ( seatStatus == 'booked' || 
-			        			 seatStatus == 'confirmed' ) ? true : false;
-			        	//console.log('sts=', sts);
-			        	//return sts;
+				created: function(){
+					var r; //row					
+					var code = 64;
+					for ( r=1; r<5; r++ ){
+						console.log('row=', r);
+						var c; //col
+						for( c=1; c<5; c++){
+							var seatNo = String.fromCharCode(code+r)+ c ;
+							console.log('col=', c);
+							console.log('seat=', seatNo); 
+							this.checkedNames.push(seatNo);
+						}
+					}
 
-			        },
-				}
+					/*while (i<3){
+						console.log('i=', i);
+						var j = 1;
+						 while (j<5) {
+							var seatNo = String.fromCharCode(code+i)+ j ;
+							//this.checkedNames.push()
+							
+							console.log('j=', j);
+							console.log('seat=', seatNo); 
+							j++;	
+						 }
+						
+						i++;
+					}*/
+				}		
 			})
 
 			new Vue({
-			    el: '#app',
-			    data: {
-			    	    seatList: [
-						      { no: 'A1', sts: 'booked', checked:false},
-						      { no: 'A2', sts: 'available', checked:false },
-						      { no: 'B1', sts: 'confirmed', checked:false },
-						      { no: 'B2', sts: 'available', checked:false }
-					    ]
-			    } 
+			    el: '#app'			    
 			})
 
 		</script>
