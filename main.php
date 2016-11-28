@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>Seat Planning</title>
+		<!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	</head>
 	<body>
 		<div id="app"> 			
@@ -14,8 +17,12 @@
 					v-bind:class="{ active : seat.checked, inactive : !seat.checked  }"
 					v-for="seat in seatList" 					
 					@click="toggle(seat)"																
-				> 				    	
+				> 											
+					<i class="fa fa-check fa-lg tickmark" v-show="seat.checked"></i>
+					<i class="fa fa-times fa-lg crossmark" aria-hidden="true" v-show="!seat.checked"></i>
+
 					{{ seat.no }} - {{ seat.sts }}
+
 				</button>			
 			
 				<!-- {{ seatStatus(seat.sts) }} -->
@@ -79,14 +86,25 @@
 		<style>
 			.active {
 				background-color: #f4e542;
-			}			
+				position: relative;
+			}					
 			.inactive {
 				background-color: #c4c0c0;	
 			}			
 			#app button {
-				width: 100px;
+				/*width: 100px;*/
 				height: 50px;
 				margin-right: 10px;
+			}
+			.tickmark {
+				/*background-color: green;*/
+				color: green;
+				/*padding: 5px;*/
+			}
+			.crossmark {
+				/*background-color: red;*/
+				/*padding: 5px;*/
+				color: red;
 			}
 		</style>
 	</body>
