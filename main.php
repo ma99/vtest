@@ -25,13 +25,13 @@
 					type="checkbox"
 					v-for="checkedName in checkedNames"
 				 	id="checkedName" 
-				 	value="checkedName" 
+				 	:value="checkedName" 
 				 	v-model="checkedNames"
 				 >
 				<label for="checkedName"> {{ checkedName }} </label>
 				<br>
-				<span>Checked names: {{ checkedNames }}</span>
-				
+
+				<span>Checked names: {{ checkedNames }}</span>			
 				
 			</div>	
 		</template>
@@ -42,7 +42,7 @@
 		
 		<script>
 			Vue.component('seat-planning', {
-				template: '#test-template',	
+				template: '#test-template',					
 				data: function(){
 					return {
 						checked: false,
