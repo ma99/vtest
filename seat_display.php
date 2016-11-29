@@ -18,7 +18,7 @@
 				<div class="row">					
 					<button 
 						class="col-xs-2"
-						v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false, empty: seat.sts=='n/a'? true : false} col-xs-offset-2: emptySpace(seat.no)"
+						v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false, empty: seat.sts=='n/a'? true : false, 'col-xs-offset-3': emptySpace(seat.no) }"
 						v-for="seat in seats" 					
 						@click="toggle(seat)"						
 						:disabled="isDisabledSeatSelection(seat.sts)"										
@@ -33,8 +33,8 @@
 		</template>
 
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		
 		
 		<script>
@@ -50,8 +50,16 @@
 				
 				methods: {
 					emptySpace: function (seatNo) {
-						var seatNumber = parseInt(get_numbers(seatNo));
-						return ( seatNumber/3 == 0 ) ? true : false;
+						
+						var seatNumber = parseInt(seatNo.match(/\d+/),10);
+
+						// if ( ( seatNumber % 3 ) == 0) {
+						// 	console.log('seat Number/3 True');
+						// 	return true;
+						// }
+						// console.log('seat Number/3 False');
+						// return false;	
+						return ( (seatNumber % 3) == 0 ) ? true : false;
 
 					},
 					toggle: function(seat){
@@ -59,23 +67,23 @@
 						// console.log(seat.no);
 						seat.checked = !seat.checked;		        		        	
 			        	if (seat.checked) {
-			        		console.log('seat checked=', seat.checked);
+			        		//console.log('seat checked=', seat.checked);
 			        		this.addSeat(seat.no); // to selectedSeat array		        		
 			        		return ;
 			        	}
-			        	console.log('seat NOT checked=', seat.checked);
+			        	//console.log('seat NOT checked=', seat.checked);
 			        	//var indx = this.selectedSeat.findIndex(seat);		        	
 			        	this.removeSeat(seat.no, seat); // to selectedSeat array		        		            
 			        },
 			        addSeat: function(seatNo){
-			        	console.log('+', seatNo);
+			        	//console.log('+', seatNo);
 			        	this.selectedSeat.push({
 			    			no: seatNo,
 							sts: 'booked' //'selected'
 			    		});
 			        },
 			        removeSeat: function(seatNo, seat){
-			        	console.log('-', seatNo);
+			        	//console.log('-', seatNo);
 			        	//var indx = this.selectedSeat.indexOf(seatNo);  
 			        	/*
 			    			'findIndex' callback is invoked with three arguments: 
