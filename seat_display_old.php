@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<title>Seat Display Component Based</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body>
 		<div id="app"> 
@@ -14,26 +13,22 @@
 		</div>
 		
 		<template id="test-template">
-			<div class="container">
-				<div class="row">					
-					<button 
-						class="col-xs-2"
-						v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false, empty: seat.sts=='n/a'? true : false} col-xs-offset-2: emptySpace(seat.no)"
-						v-for="seat in seats" 					
-						@click="toggle(seat)"						
-						:disabled="isDisabledSeatSelection(seat.sts)"										
-					> 				    	
-						{{ seat.no }} - {{ seat.sts }}
-					</button>			
-				</div>
-				<!-- v-show="seat.sts != 'n/a' ? true : false"	 -->
+			<div>
+				<button 
+					v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false }"
+					v-for="seat in seats" 					
+					@click="toggle(seat)"						
+					:disabled="isDisabledSeatSelection(seat.sts)"					
+				> 				    	
+					{{ seat.no }} - {{ seat.sts }}
+				</button>			
+			
 				<!-- {{ seatStatus(seat.sts) }} -->
 		    	<!-- <span  v-show="seat.checked">Toggle info</span> -->
 			</div>	
 		</template>
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
 		
 		
@@ -49,11 +44,6 @@
 				},
 				
 				methods: {
-					emptySpace: function (seatNo) {
-						var seatNumber = parseInt(get_numbers(seatNo));
-						return ( seatNumber/3 == 0 ) ? true : false;
-
-					},
 					toggle: function(seat){
 						// console.log('clicked');
 						// console.log(seat.no);
@@ -96,7 +86,7 @@
 			        	console.log('disableSelection=', seatStatus);
 			        	//var sts;
 			        	return ( seatStatus == 'booked' || 
-			        			 seatStatus == 'confirmed' || seatStatus == 'n/a' ) ? true : false;
+			        			 seatStatus == 'confirmed' ) ? true : false;
 			        	//console.log('sts=', sts);
 			        	//return sts;
 
@@ -109,13 +99,9 @@
 			    data: {
 			    	    seatList: [
 						      { no: 'A1', sts: 'booked', checked:false},
-						      { no: 'A2', sts: 'n/a', checked:false },
-						      { no: 'A3', sts: 'n/a', checked:false},
-						      { no: 'A4', sts: 'avaiable', checked:false },
+						      { no: 'A2', sts: 'available', checked:false },
 						      { no: 'B1', sts: 'confirmed', checked:false },
-						      { no: 'B2', sts: 'n/a', checked:false },
-						      { no: 'B3', sts: 'available', checked:false },
-						      { no: 'B4', sts: 'available', checked:false }
+						      { no: 'B2', sts: 'available', checked:false }
 					    ]
 			    } 
 			})
@@ -130,10 +116,6 @@
 			}
 			.confirmed {
 				background-color: red;
-			}
-			.empty {
-				background-color: white;
-				color:white;				
 			}
 		</style>
 	</body>
