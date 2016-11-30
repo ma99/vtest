@@ -47,10 +47,9 @@
 				template: '#test-template',				
 				data: function() {
 						return {			        		
-			        		seatChar:["A","B", "C" , "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"],
 			        		seatNo: '',		        								    
 						    seatList: [],
-						   // lastRowSeatList:[]						    
+						    lastRowSeatList:[]						    
 						}
 
 				},
@@ -59,23 +58,23 @@
 				},		
 				methods: {
 					emptySpace: function (seatNo) {
-
+						
+						var seatNumber = parseInt(seatNo.match(/\d+/),10);
 						if ( this.isFiveCol(seatNo) ) {
-							return false; // no need empty space between columns
+							return false; // no need empty space
 						}
-						var seatNumber = parseInt(seatNo.match(/\d+/),10);						
 						return ( (seatNumber % 3) == 0 ) ? true : false;
 
-					},					
+					},
 					isFiveCol: function(seatNo){
-						
-						var seatListLength =  this.seatList.length;
-						var numberOfRow = (seatListLength-1) /4; //2
-						var lastRowChar = this.seatChar[numberOfRow-1]; //B
-						lastRowChar = lastRowChar.trim();
-						
-						var seatChar = seatNo.substr(0, 1); //extract char from seat no
-						return ( lastRowChar == seatChar ) ? true : false ;
+						var arr = this.lastRowSeatList;										
+						var fiveCol = false;
+						arr.forEach(function (item) {							
+						   if (seatNo == item ) {
+						   	return fiveCol = true ;
+						   } 
+						});
+						return fiveCol; 
 					},
 					createList: function(){
 						var r; //row					
@@ -95,6 +94,9 @@
 									sts: 'available', 
 									checked: true
 								});
+								if ( r == numberOfRow ) {
+									this.lastRowSeatList.push(seatNo);
+								}							
 							}
 						}
 						seatNo = String.fromCharCode(code+numberOfRow)+ c ; //64+6 + 5 E5
@@ -103,6 +105,8 @@
 									sts: 'available', 
 									checked: true
 						});	
+						this.lastRowSeatList.push(seatNo);
+
 					},	
 					toggle: function(seat){						
 						seat.checked = !seat.checked;		        		        	
