@@ -15,11 +15,11 @@
 		<template id="test-template">
 			<div class="container">
 				<div class="row">
-					<button 						
+					<button
+						class="col-xs-2" 						
 						v-bind:class="{ active : seat.checked, 
 										inactive : !seat.checked, 
-										'col-xs-3': !showFiveCol(seat.no), 
-										'col-xs-2': showFiveCol(seat.no) 
+										'col-xs-offset-2': emptySpace(seat.no)
 										}"
 						v-for="seat in seatList" 					
 						@click="toggle(seat)"																
@@ -57,7 +57,16 @@
 					this.createList();					
 				},		
 				methods: {
-					showFiveCol: function(seatNo){
+					emptySpace: function (seatNo) {
+						
+						var seatNumber = parseInt(seatNo.match(/\d+/),10);
+						if ( this.isFiveCol(seatNo) ) {
+							return false; // no need empty space
+						}
+						return ( (seatNumber % 3) == 0 ) ? true : false;
+
+					},
+					isFiveCol: function(seatNo){
 						var arr = this.lastRowSeatList;										
 						var fiveCol = false;
 						arr.forEach(function (item) {							
@@ -65,14 +74,13 @@
 						   	return fiveCol = true ;
 						   } 
 						});
-						return fiveCol;
-
+						return fiveCol; 
 					},
 					createList: function(){
 						var r; //row					
 						var code = 64;
 						var seatNo;
-						var numberOfRow = 5;
+						var numberOfRow = 8;
 						var numberOfCol = 4;
 						for ( r=1; r<=numberOfRow; r++ ){
 							// console.log('row=', r);
@@ -138,6 +146,9 @@
 				/*padding: 5px;*/
 				color: red;
 			}
+			#app button.col-xs-2 {
+		    width: 16.76666667%;
+		}
 		</style>
 	</body>
 </html>

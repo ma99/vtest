@@ -51,14 +51,7 @@
 				methods: {
 					emptySpace: function (seatNo) {
 						
-						var seatNumber = parseInt(seatNo.match(/\d+/),10);
-
-						// if ( ( seatNumber % 3 ) == 0) {
-						// 	console.log('seat Number/3 True');
-						// 	return true;
-						// }
-						// console.log('seat Number/3 False');
-						// return false;	
+						var seatNumber = parseInt(seatNo.match(/\d+/),10);						
 						return ( (seatNumber % 3) == 0 ) ? true : false;
 
 					},
@@ -123,7 +116,8 @@
 						      { no: 'B1', sts: 'confirmed', checked:false },
 						      { no: 'B2', sts: 'n/a', checked:false },
 						      { no: 'B3', sts: 'available', checked:false },
-						      { no: 'B4', sts: 'available', checked:false }
+						      { no: 'B4', sts: 'available', checked:false },
+						      { no: 'B5', sts: 'available', checked:false }
 					    ]
 			    } 
 			})
