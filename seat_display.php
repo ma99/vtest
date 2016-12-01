@@ -142,8 +142,15 @@
 				background-color: white;
 				color:white;				
 			}
+			#app button {				
+				height: 50px;
+				margin: 10px 10px 0 0;
+			}
 			#app button.col-xs-2 {
-		    	width: 16.76666667%;
+		    	width: 16.76666667%;		    	
+			}
+			#app button.col-xs-offset-2 {
+			    margin-left: 17.666667%;
 			}
 		</style>
 	</body>
