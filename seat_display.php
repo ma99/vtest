@@ -15,7 +15,11 @@
 		
 		<template id="test-template">
 			<div class="container">
-				<div class="row">					
+
+				<div class="row">
+					<div class="col-xs-offset-9">
+						<button :disabled="true">Driver Seat</button>
+					</div>							
 					<button 
 						class="col-xs-2"
 						v-bind:class="{ 
