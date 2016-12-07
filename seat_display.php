@@ -18,7 +18,12 @@
 				<div class="row">					
 					<button 
 						class="col-xs-2"
-						v-bind:class="{ active : seat.checked, booked: seat.sts=='booked'? true : false, confirmed: seat.sts=='confirmed'? true : false, empty: seat.sts=='n/a'? true : false, 'col-xs-offset-2': emptySpace(seat.no) }"
+						v-bind:class="{ 
+						active : seat.checked, 
+						booked: seat.sts=='booked'? true : false, 
+						confirmed: seat.sts=='confirmed'? true : false, 
+						empty: seat.sts=='n/a'? true : false, 						
+						'col-xs-offset-2': emptySpace(seat.no) }"
 						v-for="seat in seatList" 					
 						@click="toggle(seat)"						
 						:disabled="isDisabledSeatSelection(seat.sts)"										
@@ -51,9 +56,18 @@
 						      { no: 'A4', sts: 'avaiable', checked:false },
 						      { no: 'B1', sts: 'confirmed', checked:false },
 						      { no: 'B2', sts: 'n/a', checked:false },
-						      { no: 'B3', sts: 'available', checked:false },
+						      { no: 'B3', sts: 'n/a', checked:false },
 						      { no: 'B4', sts: 'available', checked:false },
-						      { no: 'B5', sts: 'available', checked:false }
+						      { no: 'C1', sts: 'available', checked:false },
+						      { no: 'C2', sts: 'available', checked:false },
+						      { no: 'C3', sts: 'available', checked:false },
+						      { no: 'C4', sts: 'available', checked:false },
+						      //{ no: 'C5', sts: 'available', checked:false }
+						      { no: 'D1', sts: 'available', checked:false },
+						      { no: 'D2', sts: 'available', checked:false },
+						      { no: 'D3', sts: 'available', checked:false },
+						      { no: 'D4', sts: 'available', checked:false },
+						      { no: 'D5', sts: 'available', checked:false }
 					   		]
 						}
 				},
@@ -140,6 +154,8 @@
 			}
 			.empty {
 				background-color: white;
+				border-width: 0;
+			    /*color: #0a0a0a;*/
 				color:white;				
 			}
 			#app button {				
@@ -151,6 +167,11 @@
 			}
 			#app button.col-xs-offset-2 {
 			    margin-left: 17.666667%;
+			}
+			#app button.is-white {
+			    background-color: white;
+			    border-width: 0;
+			    color: #0a0a0a;
 			}
 		</style>
 	</body>
